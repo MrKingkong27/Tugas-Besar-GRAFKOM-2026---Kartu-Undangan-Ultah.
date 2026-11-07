@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Ulang Tahun - Tugas Besar Grafika Komputer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="header">
+  <h1>🎂 Kartu Undangan Ulang Tahun Interaktif</h1>
+  <p class="sub-title">Tugas Besar Grafika Komputer (Grafkom) — Pure Software Rasterizer & Matriks 2D</p>
+</div>
+
+<div class="canvas-container">
+  <canvas id="mycanvas" width="800" height="560"></canvas>
+</div>
+
+<div class="control-card">
+  <div class="bar">
+    <div class="input-group">
+      <span>Nama:</span>
+      <input id="nama" value="Budi" placeholder="Nama" size="10">
+    </div>
+    <div class="input-group">
+      <span>Umur:</span>
+      <input id="umur" value="17" placeholder="Umur" size="3">
+    </div>
+    <div class="input-group">
+      <span>Tanggal:</span>
+      <input id="tanggal" value="Sabtu, 15 Nov 2026 - 16.00" placeholder="Tanggal & Jam" size="23">
+    </div>
+    <div class="input-group">
+      <span>Tempat:</span>
+      <input id="tempat" value="Rumah Budi, Karawang" placeholder="Tempat Acara" size="21">
+    </div>
+    <button id="terapkan">Terapkan</button>
+    <button id="ulang">Ulang Animasi <span class="kbd">R</span></button>
+  </div>
+
+  <div class="tips">
+    <span><strong>Buka:</strong> Klik surat atau tekan <span class="kbd">Spasi</span></span>
+    <span>🎈 <strong>Balon:</strong> Tekan <span class="kbd">1</span></span>
+    <span>🎉 <strong>Confetti Popper:</strong> Tekan <span class="kbd">2</span></span>
+    <span><strong>Reset:</strong> Tekan <span class="kbd">R</span></span>
+  </div>
+</div>
+
+<script type="module" src="js/main.js?v=5"></script>
+</body>
+</html>
