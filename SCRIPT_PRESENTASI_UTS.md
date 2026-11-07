@@ -14,13 +14,20 @@
 
 Karena aplikasi ini menggunakan **JavaScript ES6 Module (`type="module"`)**, browser memerlukan protokol web (Local Server) untuk memuat modul file tanpa batasan keamanan CORS:
 
-### 1. Tautan Langsung & Eksekusi di VS Code (Paling Direkomendasikan)
+### 1. Tautan Publik Online (Bisa Diakses Siapa Saja 24/7)
+* **GitHub Repository:**  
+  👉 **[https://github.com/MrKingkong27/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah.](https://github.com/MrKingkong27/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah.)**
+* **Tautan Langsung Live Demo (GitHub Pages):**  
+  👉 **[https://mrkingkong27.github.io/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah./](https://mrkingkong27.github.io/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah./)**  
+  *(Dapat dibuka dari smartphone, laptop, atau tablet tanpa perlu menyalakan komputer)*
+
+### 2. Tautan Langsung & Eksekusi di VS Code (Lokal)
 * **Ekstensi Live Server:**  
   Klik kanan pada file [index.html](file:///d:/Semester%205/GRAFKOM/undangan/index.html) $\to$ Pilih **"Open with Live Server"**.  
   Browser akan otomatis terbuka di tautan:  
   👉 **[http://localhost:5500/index.html](http://localhost:5500/index.html)** atau **[http://127.0.0.1:5500/index.html](http://127.0.0.1:5500/index.html)**
 
-### 2. Menjalankan via Terminal (Alternatif Tanpa Ekstensi)
+### 3. Menjalankan via Terminal (Lokal)
 Buka terminal di folder project (`d:\Semester 5\GRAFKOM\undangan`) dan jalankan salah satu perintah berikut:
 * **Menggunakan Python:**
   ```bash
