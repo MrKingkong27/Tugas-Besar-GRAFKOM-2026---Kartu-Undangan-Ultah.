@@ -14,12 +14,13 @@
 
 Karena aplikasi ini menggunakan **JavaScript ES6 Module (`type="module"`)**, browser memerlukan protokol web (Local Server) untuk memuat modul file tanpa batasan keamanan CORS:
 
-### 1. Tautan Publik Online (Bisa Diakses Siapa Saja 24/7)
-* **GitHub Repository:**  
-  👉 **[https://github.com/MrKingkong27/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah.](https://github.com/MrKingkong27/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah.)**
-* **Tautan Langsung Live Demo (GitHub Pages):**  
-  👉 **[https://mrkingkong27.github.io/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah./](https://mrkingkong27.github.io/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah./)**  
-  *(Dapat dibuka dari smartphone, laptop, atau tablet tanpa perlu menyalakan komputer)*
+### 1. Tautan Publik Online (Bisa Diakses Siapa Saja 24/7 di HP/Laptop)
+* **🌐 Link Live Demo Aplikasi (GitHub Pages):**  
+  👉 **[https://kingz2472053.github.io/undangan-grafkom-2026/](https://kingz2472053.github.io/undangan-grafkom-2026/)**  
+  *(Sudah aktif online 100%! Bisa langsung diklik dan dibuka oleh dosen/siapa saja tanpa menyalakan komputer)*
+
+* **Repository Kode Sumber:**  
+  👉 **[https://github.com/kingz2472053/undangan-grafkom-2026](https://github.com/kingz2472053/undangan-grafkom-2026)** atau **[https://github.com/MrKingkong27/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah.](https://github.com/MrKingkong27/Tugas-Besar-GRAFKOM-2026---Kartu-Undangan-Ultah.)**
 
 ### 2. Tautan Langsung & Eksekusi di VS Code (Lokal)
 * **Ekstensi Live Server:**  
