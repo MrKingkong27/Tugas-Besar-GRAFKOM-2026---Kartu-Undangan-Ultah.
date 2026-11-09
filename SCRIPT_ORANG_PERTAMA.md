@@ -110,6 +110,9 @@ function gambar() {
 ```javascript
 draw_dot(x, y, color) {
     if (x < 0 || x >= this.canvas_width || y < 0 || y >= this.canvas_height) return;
+    if (this.clip != null) {
+        if (x < this.clip.x1 || x >= this.clip.x2 || y < this.clip.y1 || y >= this.clip.y2) return;
+    }
     let index = 4 * (x + (y * this.canvas_width));
     this.data[index] = color.r;
     this.data[index + 1] = color.g;
@@ -117,7 +120,7 @@ draw_dot(x, y, color) {
     this.data[index + 3] = 255;
 }
 ```
-> **Penjelasan ke Dosen:** *"Validasi `x < 0` dan `x >= width` berfungsi sebagai boundary checking (clipping) agar tidak terjadi memori out-of-bounds. Pengalian 4 dilakukan karena setiap piksel terdiri dari format 4 channel: RGBA."*
+> **Penjelasan ke Dosen:** *"Validasi `x < 0` dan `x >= width` serta pengecekan `clip` rectangle berfungsi sebagai boundary checking dan viewport clipping agar rendering kartu tidak menembus batas saku amplop. Pengalian 4 dilakukan karena setiap piksel terdiri dari format 4 channel: RGBA."*
 
 ### 3. `Teks.js` (Rasterisasi Teks Mandiri)
 ```javascript
