@@ -8,6 +8,8 @@ export default class Easing {
         return t;
     }
 
+    static inQuad(t) { return t * t; }
+
     static outQuad(t) { return 1 - (1 - t) * (1 - t); }
 
     static inOutQuad(t) {

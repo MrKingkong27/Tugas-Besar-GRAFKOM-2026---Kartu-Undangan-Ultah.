@@ -10,7 +10,7 @@ let krem = { r: 255, g: 253, b: 249 };
 let tinta_utama = { r: 85, g: 30, b: 60 };
 let emas = { r: 215, g: 165, b: 65 };
 let emas_muda = { r: 238, g: 198, b: 110 };
-let pink_pita = { r: 235, g: 75, b: 125 };
+let pink_pita = { r: 165, g: 45, b: 78 };
 let putih = { r: 255, g: 255, b: 255 };
 
 let kue_krim = { r: 255, g: 245, b: 248 };
@@ -196,13 +196,7 @@ export default class Kartu {
 
         this.gambar_kue(layer, 150, 212);
 
-        layer.dda_line(35, 230, 140, 230, emas_muda);
-        layer.dda_line(160, 230, 265, 230, emas_muda);
-        let diamond = [
-            { x: 150, y: 227 }, { x: 154, y: 230 },
-            { x: 150, y: 233 }, { x: 146, y: 230 }
-        ];
-        Bentuk.isi(layer, diamond, emas, emas, { x: 150, y: 230 });
+        layer.dda_line(35, 230, 265, 230, emas_muda);
 
         let kotak_info = Bentuk.kotak(24, 244, 252, 70);
         let bg_info = { r: 253, g: 248, b: 250 };

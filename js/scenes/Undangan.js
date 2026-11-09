@@ -121,52 +121,66 @@ export default class Undangan {
     }
 
     perbarui_buka() {
-        let n = Easing.clamp(this.waktu / 1);
+        let n = Easing.clamp(this.waktu / 0.9);
         this.amplop.tutup = Math.cos(Easing.inOutQuad(n) * Math.PI);
-        if (n >= 0.5 && this.sudah_percik == false) {
-            this.partikel.percikan(x_tengah, y_mendarat - 30, 40);
-            this.sudah_percik = true;
-        }
         if (n >= 1) {
             this.kartu.tampil = true;
             this.kartu.x = x_tengah;
+            this.kartu.y = 350;
+            this.kartu.skala = 0.58;
+            this.kartu.sudut = 0;
+            this.kartu.depan = false;
             this.ganti_state("NAIK");
         }
     }
 
     perbarui_naik() {
-        let p = Easing.clamp(this.waktu / 1.6);
-        this.kartu.y = Easing.lerp(y_mendarat + 10, y_kartu, Easing.inOutQuad(p));
-        this.kartu.skala = Easing.lerp(0.42, 1, Easing.outQuad(p));
-        this.kartu.sudut = 0.12 * Math.sin(p * Math.PI * 2);
-        this.kartu.depan = p > 0.55;
+        let p = Easing.clamp(this.waktu / 1.8);
 
-        let geser = Easing.clamp((p - 0.4) / 0.6);
-        this.amplop.y = y_mendarat + geser * geser * 300;
-        this.amplop.skala = 1;
-        this.amplop.sudut = 0;
+        if (p <= 0.5) {
+            let p1 = p / 0.5;
+            let eased1 = Easing.outQuad(p1);
+            this.kartu.y = Easing.lerp(350, 260, eased1);
+            this.kartu.skala = Easing.lerp(0.58, 0.78, eased1);
+            this.kartu.sudut = 0;
+            this.kartu.depan = false;
+            this.amplop.y = y_mendarat;
+            this.amplop.skala = 1;
+            this.amplop.sudut = 0;
+        } else {
+            let p2 = (p - 0.5) / 0.5;
+            let eased2 = Easing.inQuad(p2);
+            let cardEased = Easing.outQuad(p2);
+            this.amplop.y = Easing.lerp(y_mendarat, 680, eased2);
+            this.amplop.skala = 1;
+            this.amplop.sudut = 0;
+            this.kartu.y = Easing.lerp(260, y_kartu, cardEased);
+            this.kartu.skala = Easing.lerp(0.78, 1, cardEased);
+            this.kartu.sudut = 0;
+            this.kartu.depan = true;
+        }
 
-        if (p < 0.6) this.partikel.percikan(x_tengah + acak_lebar(), this.kartu.y - this.kartu.skala * 190, 2);
         if (p >= 1) {
             this.ganti_state("PENUH");
+            this.kartu.y = y_kartu;
             this.kartu.sudut = 0;
             this.kartu.skala = 1;
-            this.partikel.percikan(x_tengah, y_kartu, 50);
-            this.partikel.konfeti(40, 540, 30, 1);
-            this.partikel.konfeti(760, 540, 30, -1);
+            this.partikel.konfeti(60, 540, 20, 1);
+            this.partikel.konfeti(740, 540, 20, -1);
         }
     }
 
     perbarui_penuh() {
-
-        this.kartu.y = Math.round(y_kartu + 3 * Math.sin(this.waktu * 2));
+        this.kartu.y = Math.round(y_kartu + 2 * Math.sin(this.waktu * 1.5));
         this.kartu.sudut = 0;
         this.kartu.skala = 1;
     }
 
     gambar() {
         if (this.state != "PENUH") this.gambar_amplop();
-        if (this.kartu.depan) this.kartu.gambar(this.lib, this.waktu);
+        if (this.kartu.tampil && (this.kartu.depan || this.state == "PENUH")) {
+            this.kartu.gambar(this.lib, this.waktu);
+        }
         if (this.state == "MENDARAT") this.gambar_petunjuk();
         this.toolbar.gambar(this.lib);
         this.partikel.gambar(this.lib);
@@ -178,13 +192,6 @@ export default class Undangan {
         let skala = this.amplop.skala / (1 + tinggi / 400);
         let alpha = 0.3 * Easing.clamp(1 - (this.amplop.y - y_mendarat) / 150);
         this.lib.blit(this.bayangan, mat.create_model(x_tengah, y_lantai + 2, 0, skala, skala, 130, 20), alpha);
-
-        if (this.state == "JATUH" && this.waktu < 0.58) {
-            let y_atas = this.amplop.y - 90 * this.amplop.skala;
-            for (let dx = -20; dx <= 20; dx += 20) {
-                this.lib.dda_line(x_tengah + dx, y_atas - 40, x_tengah + dx, y_atas, { r: 150, g: 140, b: 160 });
-            }
-        }
 
         let kartu = this.kartu;
         let lib = this.lib;
@@ -201,8 +208,4 @@ export default class Undangan {
         let alpha = 0.65 + 0.35 * Math.sin(this.waktu * 3);
         this.lib.blit(this.petunjuk, mat.create_model(x_tengah, y, 0, 1, 1, this.petunjuk.width / 2, 0), alpha);
     }
-}
-
-function acak_lebar() {
-    return (Math.random() - 0.5) * 120;
 }

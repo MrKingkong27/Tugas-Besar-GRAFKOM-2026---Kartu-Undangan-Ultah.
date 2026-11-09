@@ -91,7 +91,12 @@ export default class Amplop {
         let m = this.matriks();
         lib.blit(this.belakang, m);
         if (this.tutup < 0) this.gambar_tutup(lib, m);
-        if (isi != null) isi();
+        if (isi != null) {
+            let y_bawah = Math.round(this.y + (TINGGI / 2) * this.skala - 2);
+            lib.set_clip(0, 0, lib.canvas_width, y_bawah);
+            isi();
+            lib.reset_clip();
+        }
         lib.blit(this.depan, m);
         if (this.tutup >= 0) this.gambar_tutup(lib, m);
     }

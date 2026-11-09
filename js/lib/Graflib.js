@@ -16,10 +16,22 @@ export class Graflib {
         this.canvas_height = c_height;
         this.image_data = image_data;
         this.data = image_data.data;
+        this.clip = null;
+    }
+
+    set_clip(x1, y1, x2, y2) {
+        this.clip = { x1: x1, y1: y1, x2: x2, y2: y2 };
+    }
+
+    reset_clip() {
+        this.clip = null;
     }
 
     draw_dot(x, y, color) {
         if (x < 0 || x >= this.canvas_width || y < 0 || y >= this.canvas_height) return;
+        if (this.clip != null) {
+            if (x < this.clip.x1 || x >= this.clip.x2 || y < this.clip.y1 || y >= this.clip.y2) return;
+        }
         let index = 4 * (x + (y * this.canvas_width));
         this.data[index] = color.r;
         this.data[index + 1] = color.g;
@@ -183,6 +195,13 @@ export class Graflib {
             let sy_min = Math.max(0, -oy);
             let sx_maks = Math.min(sprite.width, this.canvas_width - ox);
             let sy_maks = Math.min(sprite.height, this.canvas_height - oy);
+            if (this.clip != null) {
+                sx_min = Math.max(sx_min, this.clip.x1 - ox);
+                sy_min = Math.max(sy_min, this.clip.y1 - oy);
+                sx_maks = Math.min(sx_maks, this.clip.x2 - ox);
+                sy_maks = Math.min(sy_maks, this.clip.y2 - oy);
+            }
+            if (sx_min >= sx_maks || sy_min >= sy_maks) return;
 
             for (let sy = sy_min; sy < sy_maks; sy++) {
                 let y = oy + sy;
@@ -220,6 +239,13 @@ export class Graflib {
         y_min = Math.max(0, Math.floor(y_min));
         x_maks = Math.min(this.canvas_width - 1, Math.ceil(x_maks));
         y_maks = Math.min(this.canvas_height - 1, Math.ceil(y_maks));
+        if (this.clip != null) {
+            x_min = Math.max(x_min, this.clip.x1);
+            y_min = Math.max(y_min, this.clip.y1);
+            x_maks = Math.min(x_maks, this.clip.x2 - 1);
+            y_maks = Math.min(y_maks, this.clip.y2 - 1);
+        }
+        if (x_min > x_maks || y_min > y_maks) return;
 
         for (let y = y_min; y <= y_maks; y++) {
             for (let x = x_min; x <= x_maks; x++) {
