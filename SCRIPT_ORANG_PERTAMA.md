@@ -161,3 +161,4 @@ static buat(teks, ukuran, warna, gaya, keluarga) {
 
 ---
 *Dokumen ini siap dicetak atau dihafalkan sebagai panduan resmi pembuka presentasi UTS.*
+

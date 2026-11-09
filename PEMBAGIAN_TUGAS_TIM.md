@@ -186,3 +186,4 @@ Sesuai instruksi ujian: *"Setiap anggota tim wajib menguasai semua bagian kode"*
 
 ---
 *Dokumen ini merupakan lampiran resmi pembagian tugas tim untuk UTS Grafika Komputer.*
+
