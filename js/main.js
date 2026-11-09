@@ -1,7 +1,7 @@
 
-import { Graflib } from "./lib/Graflib.js?v=5";
-import Latar from "./gfx/Latar.js?v=5";
-import Undangan from "./scenes/Undangan.js?v=5";
+import { Graflib } from "./lib/Graflib.js?v=6";
+import Latar from "./gfx/Latar.js?v=6";
+import Undangan from "./scenes/Undangan.js?v=6";
 
 let canvas_handler = document.querySelector("#mycanvas");
 let context = canvas_handler.getContext("2d");

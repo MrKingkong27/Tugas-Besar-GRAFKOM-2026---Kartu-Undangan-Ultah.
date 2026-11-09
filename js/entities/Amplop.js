@@ -1,7 +1,6 @@
-
-import { buat_layer } from "../lib/Graflib.js?v=3";
-import MatrixClass from "../lib/MatrixClass.js?v=3";
-import Bentuk from "../gfx/Bentuk.js?v=3";
+import { buat_layer } from "../lib/Graflib.js";
+import MatrixClass from "../lib/MatrixClass.js";
+import Bentuk from "../gfx/Bentuk.js";
 
 let mat = new MatrixClass();
 
@@ -9,14 +8,14 @@ export let LEBAR = 240;
 export let TINGGI = 160;
 let y_lipat = 99;
 
-let garis = { r: 110, g: 42, b: 72 };
-let warna_belakang = { r: 228, g: 135, b: 162 };
-let warna_depan = { r: 255, g: 182, b: 202 };
-let warna_tutup = { r: 246, g: 152, b: 178 };
-let warna_dalam_tutup = { r: 255, g: 242, b: 232 };
-let warna_segel = { r: 235, g: 180, b: 50 };
-let warna_segel_motif = { r: 175, g: 40, b: 65 };
-let emas_aksen = { r: 255, g: 215, b: 90 };
+let garis = { r: 145, g: 125, b: 105 };
+let warna_belakang = { r: 228, g: 218, b: 206 };
+let warna_depan = { r: 242, g: 235, b: 225 };
+let warna_tutup = { r: 236, g: 228, b: 218 };
+let warna_dalam_tutup = { r: 62, g: 38, b: 48 };
+let warna_segel = { r: 148, g: 32, b: 46 };
+let warna_segel_motif = { r: 225, g: 185, b: 95 };
+let emas_aksen = { r: 212, g: 172, b: 82 };
 
 export default class Amplop {
     constructor() {
@@ -34,13 +33,11 @@ export default class Amplop {
 
         let layer = buat_layer(LEBAR, TINGGI);
         Bentuk.isi(layer, Bentuk.kotak(0, 0, LEBAR - 1, TINGGI - 1), garis, warna_belakang, { x: 120, y: 8 });
-
         layer.polygon(Bentuk.kotak(2, 2, LEBAR - 5, TINGGI - 5), emas_aksen);
         this.belakang = layer.image_data;
 
         layer = buat_layer(LEBAR, TINGGI);
         Bentuk.isi(layer, titik_depan, garis, warna_depan, { x: 120, y: 140 });
-
         layer.dda_line(0, TINGGI - 1, LEBAR / 2 - 6, y_lipat + 6, garis);
         layer.dda_line(LEBAR - 1, TINGGI - 1, LEBAR / 2 + 6, y_lipat + 6, garis);
         layer.dda_line(2, TINGGI - 2, LEBAR / 2 - 6, y_lipat + 8, emas_aksen);
@@ -49,7 +46,6 @@ export default class Amplop {
 
         layer = buat_layer(LEBAR, TINGGI);
         Bentuk.isi(layer, titik_tutup, garis, warna_tutup, { x: 120, y: 12 });
-
         layer.dda_line(1, 1, LEBAR / 2, y_lipat - 1, emas_aksen);
         layer.dda_line(LEBAR - 2, 1, LEBAR / 2, y_lipat - 1, emas_aksen);
 
@@ -59,21 +55,14 @@ export default class Amplop {
         layer.floodFillStack(cx_segel, cy_segel, warna_tutup, warna_segel);
         layer.midpoint_circle(cx_segel, cy_segel, 12, emas_aksen);
 
-        let hati_segel = Bentuk.hati(cx_segel, cy_segel - 1, 0.45);
-        Bentuk.isi(layer, hati_segel, warna_segel_motif, warna_segel_motif, { x: cx_segel, y: cy_segel - 1 }, warna_segel);
+        let motif_segel = Bentuk.bintang(cx_segel, cy_segel, 7, 3.5);
+        Bentuk.isi(layer, motif_segel, warna_segel_motif, warna_segel_motif, { x: cx_segel, y: cy_segel }, warna_segel);
         this.tutup_tertutup = layer.image_data;
 
         layer = buat_layer(LEBAR, TINGGI);
         Bentuk.isi(layer, titik_tutup, garis, warna_dalam_tutup, { x: 120, y: 12 });
-
-        let warna_dot = { r: 245, g: 175, b: 195 };
-        for (let py = 15; py < y_lipat - 15; py += 16) {
-            let lebar_baris = ((y_lipat - py) / y_lipat) * (LEBAR - 40);
-            let start_x = LEBAR / 2 - lebar_baris / 2;
-            for (let px = start_x; px <= start_x + lebar_baris; px += 20) {
-                layer.midpoint_circle(Math.round(px), py, 2, warna_dot);
-            }
-        }
+        layer.dda_line(3, 2, LEBAR / 2, y_lipat - 3, emas_aksen);
+        layer.dda_line(LEBAR - 4, 2, LEBAR / 2, y_lipat - 3, emas_aksen);
         this.tutup_terbuka = layer.image_data;
     }
 
@@ -93,7 +82,9 @@ export default class Amplop {
         if (this.tutup < 0) this.gambar_tutup(lib, m);
         if (isi != null) {
             let y_bawah = Math.round(this.y + (TINGGI / 2) * this.skala - 2);
-            lib.set_clip(0, 0, lib.canvas_width, y_bawah);
+            let x_kiri = Math.round(this.x - (LEBAR / 2) * this.skala + 4);
+            let x_kanan = Math.round(this.x + (LEBAR / 2) * this.skala - 4);
+            lib.set_clip(x_kiri, 0, x_kanan, y_bawah);
             isi();
             lib.reset_clip();
         }

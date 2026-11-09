@@ -1,8 +1,7 @@
-
-import { buat_layer } from "../lib/Graflib.js?v=3";
-import MatrixClass from "../lib/MatrixClass.js?v=3";
-import Bentuk from "../gfx/Bentuk.js?v=3";
-import Ikon from "../gfx/Ikon.js?v=3";
+import { buat_layer } from "../lib/Graflib.js";
+import MatrixClass from "../lib/MatrixClass.js";
+import Bentuk from "../gfx/Bentuk.js";
+import Ikon from "../gfx/Ikon.js";
 
 let mat = new MatrixClass();
 let LEBAR = 160;
@@ -17,13 +16,12 @@ export default class Toolbar {
         }
 
         let layer = buat_layer(LEBAR, TINGGI);
-        let garis_panel = { r: 200, g: 190, b: 205 };
-        let emas_panel = { r: 235, g: 195, b: 90 };
-        let bg_panel = { r: 255, g: 255, b: 255 };
-        let bg_tombol = { r: 246, g: 242, b: 248 };
+        let garis_panel = { r: 195, g: 175, b: 150 };
+        let emas_panel = { r: 218, g: 178, b: 88 };
+        let bg_panel = { r: 252, g: 250, b: 246 };
+        let bg_tombol = { r: 244, g: 238, b: 230 };
 
         Bentuk.isi(layer, Bentuk.kotak(0, 0, LEBAR - 1, TINGGI - 1), garis_panel, bg_panel, { x: 10, y: 10 });
-
         layer.polygon(Bentuk.kotak(2, 2, LEBAR - 5, TINGGI - 5), emas_panel);
 
         let posisi_x = [42, 118];

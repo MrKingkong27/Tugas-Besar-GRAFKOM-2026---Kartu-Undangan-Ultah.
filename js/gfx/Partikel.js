@@ -5,12 +5,12 @@ import Bentuk from "./Bentuk.js";
 let mat = new MatrixClass();
 
 let warna_warni = [
-    { r: 225, g: 180, b: 85 },
-    { r: 240, g: 205, b: 130 },
-    { r: 215, g: 125, b: 145 },
-    { r: 185, g: 60, b: 95 },
-    { r: 250, g: 240, b: 235 },
-    { r: 130, g: 180, b: 225 }
+    { r: 218, g: 175, b: 85 },
+    { r: 240, g: 210, b: 135 },
+    { r: 195, g: 155, b: 90 },
+    { r: 175, g: 55, b: 75 },
+    { r: 250, g: 242, b: 230 },
+    { r: 228, g: 185, b: 120 }
 ];
 
 function acak(min, maks) {

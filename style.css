@@ -5,8 +5,8 @@
 
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  background: radial-gradient(circle at 50% 20%, #282033 0%, #15111c 100%);
-  color: #f3effa;
+  background: radial-gradient(circle at 50% 20%, #201e24 0%, #0f0e12 100%);
+  color: #f0ecf5;
   text-align: center;
   margin: 0;
   padding: 20px 10px;
@@ -18,24 +18,19 @@ body {
 }
 
 h1 {
-  margin: 0 0 6px 0;
-  font-size: 24px;
-  letter-spacing: 0.5px;
-  color: #ffdeeb;
-}
-
-.sub-title {
   margin: 0;
-  font-size: 14px;
-  color: #c9bed9;
+  font-size: 22px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: #f7ede2;
 }
 
 .canvas-container {
   display: inline-block;
   position: relative;
   border-radius: 12px;
-  padding: 4px;
-  background: linear-gradient(135deg, #e4a853, #f584a7, #9b51e0);
+  padding: 3px;
+  background: linear-gradient(135deg, #c5a059, #e8d08d, #8d6f34);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
