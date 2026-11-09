@@ -48,16 +48,36 @@ Buka terminal di folder project (`d:\Semester 5\GRAFKOM\undangan`) dan jalankan 
 
 ---
 
-## 1. STRUKTUR PEMBAGIAN TIM & MATERI (4 ORANG)
+## 1. STRUKTUR PEMBAGIAN TUGAS & KODINGAN TIM (4 ORANG)
 
-Pembagian dibagi secara seimbang mencakup teori grafika komputer 2D, implementasi kode program, serta kesiapan menghadapi pertanyaan kritis dosen:
+Pembagian ini dirancang adil dan merata, mencakup teori, implementasi pembuatan library/fitur, serta file kodingan spesifik yang wajib dibuka dan diperlihatkan ke dosen saat presentasi:
 
-| Anggota | Peran / Topik Utama | Modul / File Kode Utama | Bobot Teori & Praktik |
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                               ARSITEKTUR & PEMBAGIAN TUGAS TIM                         │
+├────────────────────┬────────────────────┬─────────────────────┬────────────────────────┤
+│      ORANG 1       │      ORANG 2       │       ORANG 3       │        ORANG 4         │
+│  (Setup & Frame-   │ (Aljabar Matriks   │ (Primitif, Kurva &  │  (FSM, Lilin Shading,  │
+│   buffer Library)  │   & Blit Engine)   │ Polygon/FloodFill)  │  Partikel & Interaksi) │
+├────────────────────┼────────────────────┼─────────────────────┼────────────────────────┤
+│ • index.html       │ • MatrixClass.js   │ • Primitif Graflib  │ • Undangan.js (FSM)    │
+│ • style.css        │ • Blit di Graflib  │ • Bentuk.js (Kurva) │ • Amplop.js & Kartu.js │
+│ • main.js          │ • Easing.js        │ • Ikon.js           │ • Toolbar.js           │
+│ • Buffer Graflib   │                    │ • Latar.js          │ • Partikel.js          │
+│ • Teks.js          │                    │                     │                        │
+└────────────────────┴────────────────────┴─────────────────────┴────────────────────────┘
+```
+
+---
+
+### TABEL DETAIL TANGGUNG JAWAB PENGERJAAN & BAGIAN KODINGAN:
+
+| Anggota | Tugas Pengerjaan Nyata (Siapa Buat Apa) | Modul & File Tanggung Jawab | Bagian Kodingan Spesifik yang Wajib Diperlihatkan ke Dosen |
 | :--- | :--- | :--- | :--- |
-| **Anggota 1** | **Moderator, Pipeline Grafika & Framebuffer** | `main.js`, `Canvas.js`, `Teks.js` | Tujuan & Alasan Proyek, Arsitektur Software Rasterizer, Framebuffer 1D, Typography Rasterizer |
-| **Anggota 2** | **Aljabar Linier, Matriks 2D & Image Blitting** | `Matriks.js`, `Transformasi.js`, `Blit.js` | Matriks Homogen 3x3, Transformasi Komposit ($M = T \cdot S \cdot T^{-1}$), Inverse Mapping |
-| **Anggota 3** | **Algoritma Primitif & Poligon / FloodFill** | `Primitif.js`, `Parametrik.js`, `Poligon.js` | DDA vs Bresenham, Midpoint Circle 8-Oktan, Kurva Parametrik Polar (Cardioid & Mawar), Stack-Based FloodFill |
-| **Anggota 4** | **State Machine, Model Lilin & Interaktivitas** | `Undangan.js`, `Kartu.js`, `Partikel.js`, `GUI.js` | FSM 5 Fase, Silinder Volumetrik 2D & Shading Gradasi (DIP), Api Parametrik Berkedip, Fisika Partikel Euler |
+| **ORANG 1** | **Membuat Setup Halaman, Pipeline Display & Library Framebuffer:**<br>1. Menyiapkan layout canvas HTML dan CSS.<br>2. Membuat inisialisasi buffer canvas (`getImageData`/`putImageData`) di loop `main.js`.<br>3. Membuat struktur memori pixel array 1D RGBA di `Graflib.js` (`draw_dot`, `get_dot`).<br>4. Membuat rasterizer teks mandiri di `Teks.js`. | • `index.html`<br>• `style.css`<br>• `js/main.js`<br>• `js/lib/Graflib.js` *(Bagian Buffer)*<br>• `js/gfx/Teks.js` | 1. **`main.js` (Baris 9–13 & 48–52):** Pemanggilan `getImageData` dan loop `putImageData(image_data, 0, 0)`.<br>2. **`Graflib.js` (Baris 21–28):** Rumus indeks memori `Index = 4 * (x + y * width)` pada fungsi `draw_dot`.<br>3. **`Teks.js` (Baris 3–19):** Pembuatan offscreen text buffer murni tanpa menyentuh canvas utama. |
+| **ORANG 2** | **Membuat Library Matriks 2D & Algoritma Blitting:**<br>1. Mengembangkan seluruh operasi matriks homogen $3 \times 3$ di `MatrixClass.js` (translasi, rotasi, skala, fixed-point scale, inversi matriks).<br>2. Membuat fungsi transfer gambar `blit` di `Graflib.js` dengan optimasi 1:1 dan Inverse Mapping Matrix.<br>3. Membuat kurva matematika easing animasi di `Easing.js`. | • `js/lib/MatrixClass.js`<br>• `js/lib/Graflib.js` *(Fungsi `blit`)*<br>• `js/gfx/Easing.js` | 1. **`MatrixClass.js` (Baris 3–16):** Perkalian matriks baris $\times$ kolom `multiply(matA, matB)`.<br>2. **`MatrixClass.js` (Baris 56–68):** Transformasi komposit pivot `create_fixedp_scale` ($M = T \cdot S \cdot T^{-1}$) dan `create_model`.<br>3. **`Graflib.js` (Baris 205–241):** Algoritma *Inverse Mapping Blit* ($M^{-1}$) untuk mencegah lubang piksel saat objek ditransformasikan. |
+| **ORANG 3** | **Membuat Library Primitif, Kurva Polar & Polygon/FloodFill:**<br>1. Membuat algoritma garis DDA dan Bresenham di `Graflib.js`.<br>2. Membuat lingkaran Polar & Midpoint 8-oktan di `Graflib.js`.<br>3. Membuat algoritma `polygon` dan `floodFillStack` (Stack 4-Connected).<br>4. Membuat pustaka kurva parametrik polar (Cardioid, Rose Curve, Elips, Fraktal) di `Bentuk.js` serta aset di `Ikon.js` & `Latar.js`. | • `js/lib/Graflib.js` *(Primitif & Fill)*<br>• `js/gfx/Bentuk.js`<br>• `js/gfx/Ikon.js`<br>• `js/gfx/Latar.js` | 1. **`Graflib.js` (Baris 46–93):** Algoritma garis `dda_line` dan `bresenham_line`.<br>2. **`Graflib.js` (Baris 112–141):** Algoritma `midpoint_circle` dengan refleksi simetri 8-oktan.<br>3. **`Graflib.js` (Baris 151–171):** `floodFillStack` menggunakan tumpukan Array (bukan rekursi fungsi).<br>4. **`Bentuk.js` (Baris 36–58 & 72–82):** Kurva parametrik polar `cardioid`, `bunga` (rose curve), dan `fraktal_bintang`. |
+| **ORANG 4** | **Membuat State Machine Animasi, Model Lilin Shading, Partikel & Interaksi:**<br>1. Mengembangkan alur Finite State Machine (FSM 5 fase) di `Undangan.js`.<br>2. Merancang model amplop di `Amplop.js` dan perakitan kartu di `Kartu.js`.<br>3. Membuat efek kue tart dan lilin volumetrik dengan shading gradasi warna (DIP) serta api berkedip real-time.<br>4. Membuat toolbar tombol di `Toolbar.js` dan sistem partikel fisika Euler di `Partikel.js`. | • `js/scenes/Undangan.js`<br>• `js/entities/Amplop.js`<br>• `js/entities/Kartu.js`<br>• `js/entities/Toolbar.js`<br>• `js/gfx/Partikel.js` | 1. **`Undangan.js` (Baris 40–79 & 101–166):** FSM 5 Fase (`JATUH`, `MENDARAT`, `BUKA`, `NAIK`, `PENUH`) dan handling event keyboard/mouse.<br>2. **`Kartu.js` (Baris 94–103 & 133–149):** Shading gradasi silinder lilin dan kue menggunakan modulasi warna RGB per kolom DDA.<br>3. **`Kartu.js` (Baris 44–75):** Animasi nyala api lilin parametrik yang bergerak dinamis menggunakan fungsi harmonik $\sin(18t)$.<br>4. **`Partikel.js` (Baris 42–64):** Integrasi fisika Euler partikel balon dan konfeti. |
 
 ---
 
